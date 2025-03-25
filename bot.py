@@ -21,17 +21,18 @@ time.sleep(1)  # Wait for 1 second to ensure the icon is clicked and the window 
 
 
 while True:
+    time.sleep(5)
 
     # Step 2: Click and drag from (476, 200) to (1560, 774) to select text
-    pyautogui.mouseDown(220, 88)  # Press the mouse button down at the starting point
-    pyautogui.moveTo(1581,846, duration=1)  # Move the mouse to the ending point with a 1-second duration
-    pyautogui.mouseUp()  # Release the mouse button to finish the selection
-    time.sleep(1)  # Wait for 1 second to ensure the selection is completed
+
+    pyautogui.moveTo(220, 88)  # Move the mouse to the ending point with a 1-second duration
+    pyautogui.dragto(1581,846, duration=2,button='left')  # Release the mouse button to finish the selection
+
 
     # Step 3: Press Ctrl+C to copy the selected text
     pyautogui.hotkey('ctrl', 'c')
 
-    time.sleep(1)  # Wait for 1 second to allow the clipboard to update
+    time.sleep(2)  # Wait for 1 second to allow the clipboard to update
     pyautogui.click(164,550)
     # Step 4: Retrieve the copied text from the clipboard
     chat_history = pyperclip.paste()
@@ -47,7 +48,7 @@ while True:
         completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a person named harry who speaks hindi as well as english.you are from india and is a coder. You analyze chat history and respond like Naruto.Output should be the next response (text message only)  "},
+            {"role": "system", "content": "You are a person named mayank who speaks hindi as well as english.you are from india and is a coder. You analyze chat history and respond like Naruto.Output should be the next response (text message only)  "},
             {"role": "user", "content":chat_history}
         ]
         )
